@@ -1,0 +1,36 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+echo "usage: $(basename "$0") [name | dota2]"
+echo "    name is what you would put in www.twitch.tv/name"
+echo "    dota2 will check for top10 popular streams at the moment."
+echo "    livestreamer must be installed (pip install livestreamer)"
+exit
+fi
+
+function write_to_streamlist()
+{
+  response=$(curl -s -H 'Accept: application/vnd.twitchtv.v5+json' \
+  -H 'Client-ID: 84kxo56li6b9k9oh0dqg6nvemx1acc' \
+  -X GET 'https://api.twitch.tv/kraken/streams?game=Dota%202&limit=10')
+  IFS=, read -a ARRAY <<< "$response"
+  for i in "${ARRAY[@]}"
+  do
+    if [ ${#i} -gt 10 ] && [ ${i:1:7} = "viewers" ]; then
+      streamlist+="    ${i:10} viewers on "
+    fi
+    if [ ${#i} -gt 16 ] && [ ${i:1:12} = "display_name" ]; then
+      streamlist+="${i:16:-1}"
+      streamlist+=$'\n'
+    fi
+  done
+}
+
+if [ $1 = "dota2" ]
+then
+  echo "Popular Dota 2 streams right now:"
+  streamlist=""
+  write_to_streamlist
+  echo "$streamlist "
+else
+  livestreamer --http-header Client-ID=84kxo56li6b9k9oh0dqg6nvemx1acc twitch.tv/"$1" best,720p60,540p60,720p30,540p30,worst
+fi
