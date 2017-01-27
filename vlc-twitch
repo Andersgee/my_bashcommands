@@ -15,10 +15,10 @@ function write_to_streamlist()
   IFS=, read -a ARRAY <<< "$response"
   for i in "${ARRAY[@]}"
   do
-    if [ ${#i} -gt 10 ] && [ ${i:1:7} = "viewers" ]; then
+    if [[ ${#i} -gt 10 && ${i:1:7} = "viewers" ]]; then
       streamlist+="    ${i:10} viewers on "
     fi
-    if [ ${#i} -gt 16 ] && [ ${i:1:12} = "display_name" ]; then
+    if [[ ${#i} -gt 16 && ${i:1:12} = "display_name" ]]; then
       streamlist+="${i:16:-1}"
       streamlist+=$'\n'
     fi
