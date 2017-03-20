@@ -1,6 +1,6 @@
 #!/bin/bash
-if [ $# -ne 1 ]; then
-echo "usage: $(basename "$0") [name | dota2]"
+if [ $# -lt 1 ]; then
+echo "usage: $(basename "$0") [name | dota2] [quality]"
 echo "    name is what you would put in www.twitch.tv/name"
 echo "    dota2 will check for top10 popular streams at the moment."
 echo "    livestreamer must be installed (pip install livestreamer)"
@@ -32,5 +32,11 @@ then
   write_to_streamlist
   echo "$streamlist "
 else
-  livestreamer --http-header Client-ID=84kxo56li6b9k9oh0dqg6nvemx1acc twitch.tv/"$1" best,720p60,540p60,720p30,540p30,worst
+  if [ $# -lt 2 ]
+  then
+    quality="best,high,720p60,540p60,720p30,540p30,worst"
+  else
+    quality="$2"
+  fi
+  livestreamer --http-header Client-ID=84kxo56li6b9k9oh0dqg6nvemx1acc twitch.tv/"$1" "$quality"
 fi
