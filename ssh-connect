@@ -2,8 +2,10 @@
 
 function echo_usage()
 {
-  echo "usage: $(basename "$0") name"
-  echo "    name: PC, RPI, localPC, localRPI, localRPI2"
+  echo "Usage: $(basename "$0") name"
+  echo "A shorthand version of ssh using a name instead of adress."
+  echo " "
+  echo "  name: PC | RPI | localPC | localRPI | localRPI2"
   exit
 }
 
