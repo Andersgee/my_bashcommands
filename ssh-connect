@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 1 ]; then
-echo "usage: $(basename "$0") [PC | RPI | localPC | localRPI]"
+echo "usage: $(basename "$0") [PC | RPI | localPC | localRPI | localRPI2]"
 exit
 fi
 
@@ -10,5 +10,6 @@ case "$1" in
 "RPI") ssh pi@78.73.34.221 -p 22;;
 "localPC") ssh andy@192.168.1.167 -p 922;;
 "localRPI") ssh pi@192.168.1.172 -p 22;;
-*)  echo "usage: $(basename "$0") [PC | RPI | localPC | localRPI]";;
+"localRPI2") ssh pi@192.168.1.173 -p 22;;
+*)  echo "usage: $(basename "$0") [PC | RPI | localPC | localRPI | localRPI2]";;
 esac
