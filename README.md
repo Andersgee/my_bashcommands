@@ -7,15 +7,21 @@ echo 'export PATH="$PATH:/home/andy/.local/bin/my_bashcommands"' >> ~/.bashrc
 ```
 
 ```
-andy@andyPC ~ $ vlc-twitch
-usage: vlc-twitch [name | dota2]
-    name is what you would put in www.twitch.tv/name
-    dota2 will check for top10 popular streams at the moment.
-    livestreamer must be installed (pip install livestreamer)
+Usage: vlc-twitch name [quality] | dota2
+Opens a twitch stream in vlc with livestreamer which must
+be installed (pip install livestreamer).
+
+  name:    what you would put in www.twitch.tv/name
+  quality: default order is best,high,720p60,540p60,720p30,540p30,worst
+             the available ones are displayed when opening a stream.
+  dota2:   prints the 10 most popular dota2 streams at the moment.
+
 ```
 
 ```
-andy@andyPC ~ $ ssh-connect 
-usage: ssh-connect [PC | RPI | localPC | localRPI]
-    will not work if ssh keys are not set up
+Usage: ssh-connect name
+A shorthand version of ssh using a name instead of adress.
+
+  name: PC | RPI | localPC | localRPI | localRPI2
+
 ```
