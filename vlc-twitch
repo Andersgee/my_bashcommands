@@ -1,9 +1,12 @@
 #!/bin/bash
 if [ $# -lt 1 ]; then
-echo "usage: $(basename "$0") [name | dota2] [quality]"
-echo "    name is what you would put in www.twitch.tv/name"
-echo "    dota2 will check for top10 popular streams at the moment."
-echo "    livestreamer must be installed (pip install livestreamer)"
+echo "usage: $(basename "$0") streamname [quality]"
+echo "    streamname: what you would put in www.twitch.tv/streamname"
+echo "    quality: default order is best,high,720p60,540p60,720p30,540p30,worst"
+echo "             the available ones are displayed when opening a stream."
+echo " "
+echo "    $(basename "$0") dota2: will check for top10 popular streams at the moment."
+echo "    (livestreamer must be installed; pip install livestreamer)"
 exit
 fi
 
