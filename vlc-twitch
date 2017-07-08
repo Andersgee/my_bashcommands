@@ -1,13 +1,19 @@
 #!/bin/bash
+
+function echo_usage()
+{
+  echo "usage: $(basename "$0") streamname [quality]"
+  echo "    streamname: what you would put in www.twitch.tv/name"
+  echo "    quality: default order is best,high,720p60,540p60,720p30,540p30,worst"
+  echo "             the available ones are displayed when opening a stream."
+  echo " "
+  echo "    (livestreamer must be installed; pip install livestreamer)"
+  echo "    also, '$(basename "$0") dota2' will check for top10 dota2 streams at the moment."
+  exit
+}
+
 if [ $# -lt 1 ]; then
-echo "usage: $(basename "$0") streamname [quality]"
-echo "    streamname: what you would put in www.twitch.tv/streamname"
-echo "    quality: default order is best,high,720p60,540p60,720p30,540p30,worst"
-echo "             the available ones are displayed when opening a stream."
-echo " "
-echo "    $(basename "$0") dota2: will check for top10 popular streams at the moment."
-echo "    (livestreamer must be installed; pip install livestreamer)"
-exit
+  echo_usage
 fi
 
 function write_to_streamlist()
